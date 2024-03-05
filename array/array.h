@@ -8,3 +8,7 @@ size_t partition_point(
 size_t longest_inc_subseq(
     int* vec_ptr, size_t vec_len
 );
+
+size_t* to_geq_post_vec(
+    int* vec_ptr, size_t vec_len
+);
