@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(
+    c99 VERSION 1.0
+    DESCRIPTION "Portable data structures and algorithms for C99."
+    LANGUAGES C
+)
+
+add_executable(
+        c99
+
+        tree/prefix_tree.c
+
+        main.cpp
+)
