@@ -14,5 +14,7 @@ add_executable(
 
         tree/prefix_tree.c
 
+        graph/disjoint_set.c
+
         main.cpp
 )
