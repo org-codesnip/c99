@@ -9,6 +9,9 @@ project(
 add_executable(
         c99
 
+        array/binary_search.c
+        array/lis.c
+
         tree/prefix_tree.c
 
         main.cpp
