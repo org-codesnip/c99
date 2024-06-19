@@ -12,6 +12,7 @@ add_executable(
         array/binary_search.c
         array/lis.c
 
+        tree/binary_heap.c
         tree/prefix_tree.c
 
         graph/disjoint_set.c
