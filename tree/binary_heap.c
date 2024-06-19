@@ -26,10 +26,6 @@ void binary_heap_drop(BinaryHeap* self) {
     free(self->ptr);
 }
 
-size_t _binary_heap_parent(size_t v) { return (v - 1) / 2; }
-size_t _binary_heap_child_0(size_t v) { return v * 2 + 1; }
-size_t _binary_heap_child_1(size_t v) { return v * 2 + 2; }
-
 void _binary_heap_swap(BinaryHeap* self, size_t op_0, size_t op_1) {
     int t_0 = self->ptr[op_0];
     self->ptr[op_0] = self->ptr[op_1];
