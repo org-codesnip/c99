@@ -5,9 +5,14 @@
 // Max-heap implementation
 typedef struct BinaryHeap_t {
     int* ptr;
+    int (*cmp)(int, int);
     size_t cap;
     size_t len;
 } BinaryHeap;
+
+int max_heap_cmp(int op_0, int op_1) {
+    return op_0 - op_1;
+}
 
 BinaryHeap binary_heap_new(const size_t cap) {
     int* ptr = calloc(cap, sizeof(int));
@@ -15,6 +20,7 @@ BinaryHeap binary_heap_new(const size_t cap) {
 
     BinaryHeap ret = {
         .ptr = ptr,
+        .cmp = max_heap_cmp,
         .cap = cap,
         .len = len,
     };
@@ -35,7 +41,7 @@ void _binary_heap_swap(BinaryHeap* self, size_t op_0, size_t op_1) {
 void _binary_heap_swap_up(BinaryHeap* self, size_t v) {
     if (v < 1) { return; }
     size_t v_next = (v - 1) / 2; // parent
-    if (self->ptr[v_next] >= self->ptr[v]) {
+    if (self->cmp(self->ptr[v_next], self->ptr[v]) > 0) {
         // already completed max-heap
         return;
     }
@@ -60,11 +66,15 @@ void _binary_heap_swap_down(BinaryHeap* self, size_t v) {
     size_t v_next = v;
     size_t v_child_0 = v * 2 + 1;
     size_t v_child_1 = v * 2 + 2;
-    if (v_child_0 < self->len && self->ptr[v_child_0] > self->ptr[v_next]) {
-        v_next = v_child_0;
+    if (v_child_0 < self->len) {
+        if (self->cmp(self->ptr[v_child_0], self->ptr[v_next]) > 0) {
+            v_next = v_child_0;
+        }
     }
-    if (v_child_1 < self->len && self->ptr[v_child_1] > self->ptr[v_next]) {
-        v_next = v_child_1;
+    if (v_child_1 < self->len) {
+        if (self->cmp(self->ptr[v_child_1], self->ptr[v_next]) > 0) {
+            v_next = v_child_1;
+        }
     }
     if (v == v_next) { return; }
     _binary_heap_swap(self, v, v_next);
